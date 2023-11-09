@@ -1,0 +1,49 @@
+{
+    "apps": {
+        "http": {
+            "servers": {
+                "sirtunnel": {
+                    "listen": [
+                        ":443"
+                    ],
+                    "routes": [
+                        {
+                            "match": [
+                                {
+                                    "host": [
+                                        "hs.willjay.rocks"
+                                    ]
+                                }
+                            ],
+                            "handle": [
+                                {
+                                    "handler": "file_server",
+                                    "root": "/home/helloworld/static"
+                                }
+                            ]
+                        },
+                        {
+                            "match": [
+                                {
+                                    "host": [
+                                        "api.hs.willjay.rocks"
+                                    ]
+                                }
+                            ],
+                            "handle": [
+                                {
+                                    "handler": "reverse_proxy",
+                                    "upstreams": [
+                                        {
+                                            "dial": ":5000"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
