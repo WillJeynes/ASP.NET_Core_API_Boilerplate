@@ -2,7 +2,8 @@
 
 cd /home/helloworld/api/HackSheffield9
 killall dotnet
-git reset --hard origin/master
+git fetch --all
+git reset --hard origin/main
 curl localhost:2019/load -H "Content-Type: application/json" -d @caddy_config.json
 chmod a+rwx ~/api/HackSheffield9/data.db
 dotnet publish --configuration Release HackSheffield.csproj 
