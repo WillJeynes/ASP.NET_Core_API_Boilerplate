@@ -7,6 +7,12 @@ builder.Services.AddLogging(builder =>
     {
         builder.AddConsole(); // Add console logging
     });
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+}));
 
 
 var app = builder.Build();
