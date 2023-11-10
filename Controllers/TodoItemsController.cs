@@ -21,8 +21,12 @@ namespace HackSheffield.Controllers
 
         // GET: api/TodoItems
         [HttpGet]
-        public async Task<ActionResult<List<TodoItem>>> Get()
+        public async Task<ActionResult<List<TodoItem>>> Get([FromQuery] String key)
         {
+            if (Models.User.getByKey(key) == null)
+            {
+                return StatusCode(401, "Please provide api key");
+            }
             return  TodoItem.getAll();
         }
 
